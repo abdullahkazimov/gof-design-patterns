@@ -18,23 +18,19 @@ class MobilePlatform(PaymentPlatform):
         return "Paid through mobile app"
 
 class PaymentMethod(ABC):
-
+    def __init__(self, platform: PaymentPlatform):
+            self.platform = platform
+    
     @abstractmethod
     def pay(self) -> None:
         pass
 
 class CashPayment(PaymentMethod):
 
-    def __init__(self, platform: PaymentPlatform):
-        self.platform = platform
-    
     def pay(self):
         print(f"Cash Payment Status: {self.platform.process_payment()}")
 
 class CardPayment(PaymentMethod):
-
-    def __init__(self, platform: PaymentPlatform):
-        self.platform = platform
     
     def pay(self):
         print(f"Card Payment Status: {self.platform.process_payment()}")
